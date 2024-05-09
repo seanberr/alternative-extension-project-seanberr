@@ -29,7 +29,7 @@ I aim to expand the project by introducing a variety of new features that will e
 
 * **At least 3 playable characters with different abilities** Each with unique sprites and animation.
 * **Snare beats align to the music** Snares sync up with the tempo of the music to make the game easier to play.
-* **Tutorial level and final level** 2 extra levels to teach the game, and test the players skills at the end.
+* **Tutorial level and final level** 2 extra levels: one to teach the game, and test the players skills at the end.
 * **Item/Powerup pickups** Systems to allow players to pick up and use items or powerups.
 
 

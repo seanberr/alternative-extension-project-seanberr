@@ -10,6 +10,7 @@ enum class State {
 	LEVEL,
 	TITLE,
 	PAUSE,
+	CHARSELECT,
 	PRE_ONE,
 	PRE_TWO,
 	PRE_THREE,
@@ -17,6 +18,12 @@ enum class State {
 	RUNNER,
 	WIZARD,
 	RESET
+};
+
+enum class Character {
+	C1,
+	C2,
+	C3
 };
 
 
@@ -39,8 +46,12 @@ class GameState
 public:
 	// Set the current state
 	void setCurrentState(State s);
+	// Set the current character selected
+	void setCurrentCharacter(Character c);
 	// Returns the current state.
 	State getCurrentState();
+	// Returns the current character selected
+	Character getCurrentCharacter();
 
 	void addResult(std::string attr, float v);
 	runResults* getResults();
@@ -49,6 +60,7 @@ public:
 
 
 protected:
+	Character currentCharacter;
 	State currentState;
 	runResults* results = new runResults();
 	bool singleRun;

@@ -17,6 +17,7 @@ private:
 	sf::Font font;
 	sf::Text explain;
 	GameObject bg;
+	State nextState;
 
 
 };

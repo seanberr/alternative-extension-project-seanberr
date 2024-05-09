@@ -135,7 +135,8 @@ int main()
 		case State::PRE_TWO:
 		case State::PRE_THREE:
 		case State::ENDGAME:
-			// All four of these states are captured in the transition level
+		case State::CHARSELECT:
+			// All five of these states are captured in the transition level
 			transLevel.handleInput(deltaTime);
 			transLevel.update(deltaTime);
 			transLevel.render();

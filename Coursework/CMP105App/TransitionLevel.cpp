@@ -33,19 +33,44 @@ void TransitionLevel::handleInput(float dt)
 		switch (gameState->getCurrentState())
 		{
 		case State::PRE_ONE:
-			gameState->setCurrentState(State::LEVEL);
+			nextState = State::LEVEL;
 			break;
 		case State::PRE_TWO:
-			gameState->setCurrentState(State::RUNNER);
-			break;
+			nextState = State::RUNNER;
+			break; 
 		case State::PRE_THREE:
-			gameState->setCurrentState(State::WIZARD);
+			nextState = State::WIZARD;
 			break;
 		case State::ENDGAME:
 			gameState->setCurrentState(State::RESET);
 			break;
 		}
+		gameState->setCurrentState(State::CHARSELECT);
 	}
+
+		if (gameState->getCurrentState() == State::CHARSELECT)
+		{
+			if (input->isPressed(sf::Keyboard::Num1))
+			{
+				gameState->setCurrentCharacter(Character::C1);
+			}
+
+			if (input->isPressed(sf::Keyboard::Num2))
+			{
+				gameState->setCurrentCharacter(Character::C2);
+			}
+
+			if (input->isPressed(sf::Keyboard::Num3))
+			{
+				gameState->setCurrentCharacter(Character::C3);
+			}
+
+			if (input->isPressed(sf::Keyboard::Space))
+			{
+				gameState->setCurrentState(nextState);
+			}
+			
+		} 
 }
 
 void TransitionLevel::update(float dt)
@@ -61,6 +86,9 @@ void TransitionLevel::update(float dt)
 		break;
 	case State::PRE_THREE:
 		explain.setString("Move with WASD.\nMove in time with the claps.\nAvoid Tanks and Pits.\nThere is a checkpoint.\nYou will be assisted.\nKind of.\nHit Enter.\nGood Luck.");
+		break;
+	case State::CHARSELECT:
+		explain.setString("Select your character!\nThere are three options:\n1. Dino Zach (1HP, Easier Movement)\n2. Dino Chris (2HP, Regular Movement)\n3. Dino Tomar (3HP, Harder  Movement)\nPress 1, 2, or 3 to make your selection.");
 		break;
 	case State::ENDGAME:
 		runResults* results = gameState->getResults();

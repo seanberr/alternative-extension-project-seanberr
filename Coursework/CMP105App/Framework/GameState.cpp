@@ -7,10 +7,20 @@ void GameState::setCurrentState(State s)
 	currentState = s;
 }
 
+void GameState::setCurrentCharacter(Character c)
+{
+	currentCharacter = c;
+}
+
 // Returns the current state.
 State GameState::getCurrentState()
 {
 	return currentState;
+}
+
+Character GameState::getCurrentCharacter()
+{
+	return currentCharacter;
 }
 
 void GameState::addResult(std::string attr, float v)

@@ -19,11 +19,11 @@ TitleScreen::TitleScreen(sf::RenderWindow* hwnd, Input* in, GameState* gs, Audio
 	montsFont.loadFromFile("font/montS.ttf");
 	explanationText.setFont(montsFont);
 	explanationText.setString("The Forbidden Rhythms.\n\tYou must unleash them.\n\t\tYour fans are waiting.\n\t\t\tHit the space bar.\n\t\t\t\tBegin.");
-	explanationText.setPosition(window->getSize().x * 0.3, window->getSize().y * 0.2);
+	explanationText.setPosition(window->getSize().x * 0.4, window->getSize().y * 0.2);
 	explanationText.setCharacterSize(40);
 	titleText.setFont(montsFont);
-	titleText.setString("FORBIDDEN\n\tRHYTHMS");
-	titleText.setPosition(10, window->getSize().y * 0.2);
+	titleText.setString("UNFORBIDDEN\n\tRHYTHMS");
+	titleText.setPosition(window->getSize().x * 0.05, window->getSize().y * 0.2);
 	titleText.setCharacterSize(60);
 	singleRunText.setFont(montsFont);
 	singleRunText.setCharacterSize(40);
