@@ -63,6 +63,7 @@ void TransitionLevel::handleInput(float dt)
 			if (input->isPressed(sf::Keyboard::Num3))
 			{
 				gameState->setCurrentCharacter(Character::C3);
+				std::cout << "hi";
 			}
 
 			if (input->isPressed(sf::Keyboard::Space))

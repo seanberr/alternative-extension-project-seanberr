@@ -23,7 +23,8 @@ private:
 
 	// constant declarations
 	const float GRID_Y_MAX_PROPORTION = 0.6f;	// how wide, as a proportion of the window, can the grid be
-	const float TIME_PER_STEP = 1.0f;	// time for each step (time between claps)
+	const float TEMPO = 110.0f; //Tempo of claps
+	const float TIME_PER_STEP = 120 / TEMPO;	// time for each step (time between claps)
 	const float TIME_FOR_ACTION = 0.25f;	// how long (seconds) does the player have to act
 	const float TIME_BUFFER = 0.25f;	// time between end of action window and end of step.
 	const float RESET_TIME = 1.0f;		// time for 'reset' state where player cannot move.
@@ -41,9 +42,9 @@ private:
 
 	TextureManager* textMan;
 	GameObject gridBoard;
-	Player player;
 	GameObject target;
 	GameObject moveSelected;
+	Player player;
 	GameObject progressInStep;
 	GameObject targetZone;
 	GameObject progressInStepBG;
@@ -69,6 +70,8 @@ private:
 	float damagedTimer = 0.f;
 	float alertHasBeenActiveFor = TIME_TO_DISPLAY_ALERT;
 	float boardTop, boardRight, boardBottom, boardLeft;
+	bool spritesLoaded = false;
+
 	
 	// analytics values
 	float timeTaken = 0.f;

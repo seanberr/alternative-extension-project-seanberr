@@ -17,7 +17,10 @@ AudioManager::AudioManager()
 	addSound("sfx/death.wav", "death");
 	addSound("sfx/success.wav", "success");
 
-	addMusic("sfx/bg_digitalLove.wav", "digitalLove");
+	addMusic("sfx/bg_digitalLove.ogg", "digitalLove");
+	addMusic("sfx/bg_titleMusic.ogg", "titleMusic");
+	addMusic("sfx/bg_runnerLevel.ogg", "runnerLevel");
+
 }
 
 AudioManager::~AudioManager()

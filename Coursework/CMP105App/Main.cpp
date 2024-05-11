@@ -90,12 +90,15 @@ int main()
 	// begin on the title screen
 	gameState.setCurrentState(State::TITLE);
 
+	//select character 2 by default
+	gameState.setCurrentCharacter(Character::C2);
+
 	// Initialise objects for delta time
 	sf::Clock clock;
 	float deltaTime;
 
-	// crank the music
-	audioManager.playMusicbyName("digitalLove");
+	//initialise music playing variable
+	std::string musicPlaying = "Temp";
 
 
 	// Game Loop
@@ -112,16 +115,31 @@ int main()
 		switch (gameState.getCurrentState())
 		{
 		case State::TITLE:
+			if (musicPlaying != "titleMusic")
+			{
+				audioManager.playMusicbyName("titleMusic");
+				musicPlaying = "titleMusic";
+			}
 			TitleScreen.handleInput(deltaTime);
 			TitleScreen.update(deltaTime);
 			TitleScreen.render();
 			break;
 		case State::LEVEL:
+			if (musicPlaying != "digitalLove")
+			{
+				audioManager.playMusicbyName("digitalLove");
+				musicPlaying = "digitalLove";
+			}
 			motivationLevel.handleInput(deltaTime);
 			motivationLevel.update(deltaTime);
 			motivationLevel.render();
 			break;
 		case State::RUNNER:
+			if (musicPlaying != "runnerLevel")
+			{
+				audioManager.playMusicbyName("runnerLevel");
+				musicPlaying = "runnerLevel";
+			}
 			runnerLevel.handleInput(deltaTime);
 			runnerLevel.update(deltaTime);
 			runnerLevel.render();

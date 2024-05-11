@@ -2,6 +2,7 @@
 
 #include "Framework/GameObject.h"
 #include "Framework/Animation.h"
+#include "Framework/GameState.h"
 
 class Player : public GameObject
 {
@@ -9,6 +10,7 @@ public:
 	Player();
 	~Player();
 
+	void loadSprites(int ch);
 	void handleInput(float dt);
 	void setDamaged(float timer);
 	bool isDamaged();
@@ -36,5 +38,6 @@ public:
 
 	float damagedTimer = 0.f;
 	float damageLength = 100.0f;
+
 };
 

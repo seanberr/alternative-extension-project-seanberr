@@ -188,6 +188,25 @@ void Level::handleInput(float dt)
 // Update game objects
 void Level::update(float dt)
 {
+	//change sprite to match character once
+	if (spritesLoaded == false)
+	{
+		switch (gameState->getCurrentCharacter())
+		{
+		case Character::C1:
+			player.loadSprites(1);
+			break;
+		case Character::C2:
+			player.loadSprites(2);
+			break;
+		case Character::C3:
+			player.loadSprites(3);
+			break;
+		}
+		spritesLoaded = true;
+	}
+
+
 	// display alert or reset alert.
 	if (alert.getString() != "" && alertHasBeenActiveFor < TIME_TO_DISPLAY_ALERT)
 	{
