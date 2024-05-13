@@ -375,6 +375,7 @@ void WizardLevel::update(float dt)
 		case UP:
 			if (playerPosition.second == 0)
 			{
+				audio->playSoundbyName("death");
 				player.setHP(player.getHP() - 1);
 				if (player.getHP() <= 0) {
 					resetPlayer();
@@ -390,6 +391,7 @@ void WizardLevel::update(float dt)
 		case RIGHT:
 			if (playerPosition.first == boardDimensions.x - 1)
 			{
+				audio->playSoundbyName("death");
 				player.setHP(player.getHP() - 1);
 				if (player.getHP() <= 0) {
 					resetPlayer();
@@ -406,6 +408,7 @@ void WizardLevel::update(float dt)
 		case DOWN:
 			if (playerPosition.second == boardDimensions.y - 1)
 			{
+				audio->playSoundbyName("death");
 				player.setHP(player.getHP() - 1);
 				if (player.getHP() <= 0) {
 					resetPlayer();
@@ -421,6 +424,7 @@ void WizardLevel::update(float dt)
 		case LEFT:
 			if (playerPosition.first == 0)
 			{
+				audio->playSoundbyName("death");
 				player.setHP(player.getHP() - 1);
 				if (player.getHP() <= 0) {
 					resetPlayer();
@@ -440,6 +444,7 @@ void WizardLevel::update(float dt)
 		);
 		if (grid.playerHit(playerPosition))
 		{
+			audio->playSoundbyName("death");
 			player.setHP(player.getHP() - 1);
 			if (player.getHP() <= 0) {
 				resetPlayer();

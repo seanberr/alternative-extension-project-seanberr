@@ -299,6 +299,10 @@ void RunnerLevel::update(float dt)
 		}
 	}
 
+	if (p.getPosition().y > window->getSize().y * 0.6)
+	{
+		p.setPosition(p.getPosition().x, window->getSize().y * 0.6);
+	}
 }
 
 void RunnerLevel::render()

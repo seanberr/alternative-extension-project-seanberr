@@ -93,6 +93,9 @@ void TransitionLevel::update(float dt)
 	case State::PRE_THREE:
 		explain.setString("Move with WASD.\nMove in time with the claps.\nAvoid Tanks and Pits.\nThere is a checkpoint.\nYou will be assisted.\nKind of.\nHit Enter.\nGood Luck.");
 		break;
+	case State::PRE_FOUR:
+		explain.setString("Welcome to Unforbidden Rhythms!\nMove with WASD.\nMove in time with the claps.\nAvoid Tanks and Pits.\nThere is a checkpoint.\nHit Enter.\nGood Luck.");
+		break;
 	case State::CHARSELECT:
 		explain.setString("Select your character!\nThere are three options:\n1. Dino Zach (1HP, Hard)\n2. Dino Chris (2HP, Easy)\n3. Dino Tomar (3HP, Baby)\nPress 1, 2, or 3 to make your selection, then press space to start.");
 		break;

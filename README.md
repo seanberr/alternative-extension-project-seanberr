@@ -30,3 +30,9 @@ Unforbidden Rhythms
 -There are now 3 different playable characters. They range in difficulty from easy to hard, having differening amounts of health.
 
 -There is now a tutorial level that teaches the basics of the game.
+
+-Added additional music
+
+## Bugs Fixed
+
+-Character will no longer fall through the stage if they jump too many times in the runner level
