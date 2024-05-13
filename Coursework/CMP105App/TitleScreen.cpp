@@ -18,7 +18,7 @@ TitleScreen::TitleScreen(sf::RenderWindow* hwnd, Input* in, GameState* gs, Audio
 	// .. for the text
 	montsFont.loadFromFile("font/montS.ttf");
 	explanationText.setFont(montsFont);
-	explanationText.setString("The Forbidden Rhythms.\n\tYou must unleash them.\n\t\tYour fans are waiting.\n\t\t\tHit the space bar.\n\t\t\t\tBegin.");
+	explanationText.setString("The Unforbidden Rhythms.\n\tYou must leash them.\n\t\tYour fans are waiting.\n\t\t\tHit the space bar.\n\t\t\t\tBegin.");
 	explanationText.setPosition(window->getSize().x * 0.4, window->getSize().y * 0.2);
 	explanationText.setCharacterSize(40);
 	titleText.setFont(montsFont);

@@ -7,6 +7,7 @@
 #include "StageGrid.h"
 #include "Player.h"
 #include "Lecturer.h"
+#include "Heart.h"
 
 class Level : BaseLevel{
 public:
@@ -23,7 +24,7 @@ private:
 
 	// constant declarations
 	const float GRID_Y_MAX_PROPORTION = 0.6f;	// how wide, as a proportion of the window, can the grid be
-	const float TEMPO = 110.0f; //Tempo of claps
+	const float TEMPO = 120.0f; //Tempo of claps
 	const float TIME_PER_STEP = 120 / TEMPO;	// time for each step (time between claps)
 	const float TIME_FOR_ACTION = 0.25f;	// how long (seconds) does the player have to act
 	const float TIME_BUFFER = 0.25f;	// time between end of action window and end of step.
@@ -70,8 +71,12 @@ private:
 	float damagedTimer = 0.f;
 	float alertHasBeenActiveFor = TIME_TO_DISPLAY_ALERT;
 	float boardTop, boardRight, boardBottom, boardLeft;
-	bool spritesLoaded = false;
+	bool characterLoaded = false;
 
+	//health system
+	Heart heart1;
+	Heart heart2;
+	Heart heart3;
 	
 	// analytics values
 	float timeTaken = 0.f;

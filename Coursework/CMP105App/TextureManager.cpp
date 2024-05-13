@@ -23,6 +23,7 @@ TextureManager::TextureManager()
     }
 
     // Add individual icon textures to the manager
+    // Add individual icon textures to the manager
     addTexture("flatLight00.png", 160, 305, 96, 96);
     addTexture("flatLight01.png", 473, 461, 61, 76);
     addTexture("flatLight02.png", 0, 480, 125, 125);

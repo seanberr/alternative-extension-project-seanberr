@@ -72,8 +72,11 @@ RunnerLevel::RunnerLevel(sf::RenderWindow* hwnd, Input* in, GameState* gs, Audio
 	}
 	
 	// setup Player
+
+
 	p.setPosition(30, window->getSize().y * 0.6);
 	speed = 0.f;
+
 
 	progressP.setSize(sf::Vector2f(window->getSize().y * 0.04, window->getSize().y * 0.04));
 	progressP.setPosition(0.25 * window->getSize().x, 0.03 * window->getSize().y);
@@ -91,6 +94,18 @@ RunnerLevel::RunnerLevel(sf::RenderWindow* hwnd, Input* in, GameState* gs, Audio
 
 	p.setDamaged(0.5);
 
+	//setup lives component
+	heart1.updateHealthDisplay(p.getHP(), textMan, 1);
+	heart1.setPosition(sf::Vector2f(0, 0));
+	heart1.setSize(sf::Vector2f(100, 100));
+
+	heart2.updateHealthDisplay(p.getHP(), textMan, 2);
+	heart2.setPosition(sf::Vector2f(0, 100));
+	heart2.setSize(sf::Vector2f(100, 100));
+
+	heart3.updateHealthDisplay(p.getHP(), textMan, 3);
+	heart3.setPosition(sf::Vector2f(0, 200));
+	heart3.setSize(sf::Vector2f(100, 100));
 }
 
 RunnerLevel::~RunnerLevel()
@@ -106,7 +121,7 @@ void RunnerLevel::handleInput(float dt)
 	}
 	if (input->isKeyDown(sf::Keyboard::Enter) && !p.isKicking())
 	{
-		p.setKicking(0.5);
+		p.setKicking(0.25);
 	}
 	
 }
@@ -123,6 +138,27 @@ bool RunnerLevel::colliding(GameObject obj)
 
 void RunnerLevel::update(float dt)
 {
+	//initialize character specific variables
+	if (characterLoaded == false)
+	{
+		switch (gameState->getCurrentCharacter())
+		{
+		case Character::C1:
+			p.loadCharacter(1);
+			break;
+		case Character::C2:
+			p.loadCharacter(2);
+			break;
+		case Character::C3:
+			p.loadCharacter(3);
+			break;
+		}
+		characterLoaded = true;
+
+		heart1.updateHealthDisplay(p.getHP(), textMan, 1);
+		heart2.updateHealthDisplay(p.getHP(), textMan, 2);
+		heart3.updateHealthDisplay(p.getHP(), textMan, 3);
+	}
 	// race over;
 	if (travelled >= distance)
 	{
@@ -203,8 +239,19 @@ void RunnerLevel::update(float dt)
 	// check for collisions
 	if (p.isDamaged())
 	{
-		// if you're damaged you can keep going.
-		return;
+		//update heart display
+		heart1.updateHealthDisplay(p.getHP(), textMan, 1);
+		heart2.updateHealthDisplay(p.getHP(), textMan, 2);
+		heart3.updateHealthDisplay(p.getHP(), textMan, 3);
+		//if hp is 0 then reset level, else keep going
+		if (p.getHP() <= 0)
+		{
+			reset();
+		}
+		else 
+		{
+			return;
+		}
 	}
 	for (int i = 0; i < kickables.size(); ++i)// k : kickables)
 	{
@@ -225,9 +272,11 @@ void RunnerLevel::update(float dt)
 			} 
 			else
 			{
+				p.setHP(p.getHP() - 1);
+				std::cout << (p.getHP()) << "\n";
 				hits++;
 				p.setDamaged(1);
-				speed = 0.f;
+				speed = 100.f;
 				// delete object so you don't collide with it again.
 				kickables.erase(kickables.begin()+i);
 				audio->playSoundbyName("death");
@@ -241,8 +290,10 @@ void RunnerLevel::update(float dt)
 		if (colliding(j))
 		{
 			hits++;
+			p.setHP(p.getHP() - 1);
+			std::cout << (p.getHP()) << "\n";
 			p.setDamaged(1);
-			speed = 0.f;
+			speed = 100.f;
 			jumpables.erase(jumpables.begin() + i);
 			audio->playSoundbyName("death");
 		}
@@ -262,6 +313,9 @@ void RunnerLevel::render()
 	window->draw(progressLine);
 	window->draw(destinationPoint);
 	window->draw(progressP);
+	window->draw(heart1);
+	window->draw(heart2);
+	window->draw(heart3);
 	for (GameObject e : explosions) window->draw(e);
 	window->draw(moon);
 	endDraw();
@@ -269,12 +323,13 @@ void RunnerLevel::render()
 
 void RunnerLevel::reset()
 {
+	characterLoaded = false;
 	std::srand(static_cast<unsigned>(std::time(nullptr)));
 	hits = 0;
 	time = 0.f;
 	objects = 0.f;
 	travelled = 0.f;
-
+	
 	// setup Player
 	p.setPosition(30, window->getSize().y * 0.6);
 	speed = 0.f;

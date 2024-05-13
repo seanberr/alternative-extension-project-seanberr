@@ -10,7 +10,7 @@ public:
 	Player();
 	~Player();
 
-	void loadSprites(int ch);
+	void loadCharacter(int ch);
 	void handleInput(float dt);
 	void setDamaged(float timer);
 	bool isDamaged();
@@ -20,6 +20,8 @@ public:
 	bool isKicking();
 	void setKicking(float t);
 	bool canJump() const;
+	int getHP();
+	void setHP(int h);
 
 	sf::Texture dino;
 	Input in;
@@ -39,5 +41,7 @@ public:
 	float damagedTimer = 0.f;
 	float damageLength = 100.0f;
 
+	//health component
+	int hp;
 };
 

@@ -125,10 +125,10 @@ int main()
 			TitleScreen.render();
 			break;
 		case State::LEVEL:
-			if (musicPlaying != "digitalLove")
+			if (musicPlaying != "levelLevel")
 			{
-				audioManager.playMusicbyName("digitalLove");
-				musicPlaying = "digitalLove";
+				audioManager.playMusicbyName("levelLevel");
+				musicPlaying = "levelLevel";
 			}
 			motivationLevel.handleInput(deltaTime);
 			motivationLevel.update(deltaTime);
@@ -145,6 +145,11 @@ int main()
 			runnerLevel.render();
 			break;
 		case State::WIZARD:
+			if (musicPlaying != "wizardLevel")
+			{
+				audioManager.playMusicbyName("wizardLevel");
+				musicPlaying = "wizardLevel";
+			}
 			wizardLevel.handleInput(deltaTime);
 			wizardLevel.update(deltaTime);
 			wizardLevel.render();

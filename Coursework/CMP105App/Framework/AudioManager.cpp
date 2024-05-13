@@ -17,7 +17,9 @@ AudioManager::AudioManager()
 	addSound("sfx/death.wav", "death");
 	addSound("sfx/success.wav", "success");
 
-	addMusic("sfx/bg_digitalLove.ogg", "digitalLove");
+	addMusic("sfx/bg_tutorialLevel.ogg", "tutorialLevel");
+	addMusic("sfx/bg_wizardLevel.ogg", "wizardLevel");
+	addMusic("sfx/bg_levelLevel.ogg", "levelLevel");
 	addMusic("sfx/bg_titleMusic.ogg", "titleMusic");
 	addMusic("sfx/bg_runnerLevel.ogg", "runnerLevel");
 

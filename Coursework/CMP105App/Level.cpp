@@ -8,6 +8,7 @@ Level::Level(sf::RenderWindow* hwnd, Input* in, GameState* gs, AudioManager* aud
 	audio = aud;
 	textMan = tm;
 
+
 	// create the lecturer object.
 	lecturer = Lecturer(window, textMan);
 
@@ -55,6 +56,20 @@ Level::Level(sf::RenderWindow* hwnd, Input* in, GameState* gs, AudioManager* aud
 	);
 	player.setSize(sf::Vector2f(cellDim, cellDim));
 
+	//setup lives component
+	heart1.updateHealthDisplay(player.getHP(), textMan, 1);
+	heart1.setPosition(sf::Vector2f(0 ,0));
+	heart1.setSize(sf::Vector2f(100, 100));
+
+	heart2.updateHealthDisplay(player.getHP(), textMan, 2);
+	heart2.setPosition(sf::Vector2f(0, 100));
+	heart2.setSize(sf::Vector2f(100, 100));
+
+	heart3.updateHealthDisplay(player.getHP(), textMan, 3);
+	heart3.setPosition(sf::Vector2f(0, 200));
+	heart3.setSize(sf::Vector2f(100, 100));
+
+
 	// Setup progress bar component.
 	progressInStep.setPosition(sf::Vector2f(900, 800));
 	progressInStep.setSize(sf::Vector2f(0, 200));
@@ -80,7 +95,7 @@ Level::Level(sf::RenderWindow* hwnd, Input* in, GameState* gs, AudioManager* aud
 	controlBG.setPosition(boardLeft, boardBottom);
 	controlBG.setSize(sf::Vector2f(380, 280));
 	controlBG.setFillColor(sf::Color::Red);
-
+	
 	// setup grid component.
 	grid = StageGrid(
 		sf::Vector2i(numCols, numRows), 
@@ -188,22 +203,26 @@ void Level::handleInput(float dt)
 // Update game objects
 void Level::update(float dt)
 {
-	//change sprite to match character once
-	if (spritesLoaded == false)
+	//initialize character specific variables
+	if (characterLoaded == false)
 	{
 		switch (gameState->getCurrentCharacter())
 		{
 		case Character::C1:
-			player.loadSprites(1);
+			player.loadCharacter(1);
 			break;
 		case Character::C2:
-			player.loadSprites(2);
+			player.loadCharacter(2);
 			break;
 		case Character::C3:
-			player.loadSprites(3);
+			player.loadCharacter(3);
 			break;
 		}
-		spritesLoaded = true;
+		characterLoaded = true;
+
+		heart1.updateHealthDisplay(player.getHP(), textMan, 1);
+		heart2.updateHealthDisplay(player.getHP(), textMan, 2);
+		heart3.updateHealthDisplay(player.getHP(), textMan, 3);
 	}
 
 
@@ -309,7 +328,14 @@ void Level::update(float dt)
 		case UP:
 			if (playerPosition.second == 0)
 			{
-				resetPlayer();
+				player.setHP(player.getHP() - 1);
+				if (player.getHP() <= 0) {
+					resetPlayer();
+				}
+
+				heart1.updateHealthDisplay(player.getHP(), textMan, 1);
+				heart2.updateHealthDisplay(player.getHP(), textMan, 2);
+				heart3.updateHealthDisplay(player.getHP(), textMan, 3);
 				break;
 			}
 			playerPosition.second--;	// positive-y innit.
@@ -317,7 +343,13 @@ void Level::update(float dt)
 		case RIGHT:
 			if (playerPosition.first == boardDimensions.x - 1)
 			{
-				resetPlayer();
+				player.setHP(player.getHP() - 1);
+				if (player.getHP() <= 0) {
+					resetPlayer();
+				}
+				heart1.updateHealthDisplay(player.getHP(), textMan, 1);
+				heart2.updateHealthDisplay(player.getHP(), textMan, 2);
+				heart3.updateHealthDisplay(player.getHP(), textMan, 3);
 				break;
 			}
 			playerPosition.first++;
@@ -326,7 +358,13 @@ void Level::update(float dt)
 		case DOWN:
 			if (playerPosition.second == boardDimensions.y - 1)
 			{
-				resetPlayer();
+				player.setHP(player.getHP() - 1);
+				if (player.getHP() <= 0) {
+					resetPlayer();
+				}
+				heart1.updateHealthDisplay(player.getHP(), textMan, 1);
+				heart2.updateHealthDisplay(player.getHP(), textMan, 2);
+				heart3.updateHealthDisplay(player.getHP(), textMan, 3);
 				break;
 			}
 			playerPosition.second++;
@@ -334,7 +372,13 @@ void Level::update(float dt)
 		case LEFT:
 			if (playerPosition.first == 0)
 			{
-				resetPlayer();
+				player.setHP(player.getHP() - 1);
+				if (player.getHP() <= 0) {
+					resetPlayer();
+				}
+				heart1.updateHealthDisplay(player.getHP(), textMan, 1);
+				heart2.updateHealthDisplay(player.getHP(), textMan, 2);
+				heart3.updateHealthDisplay(player.getHP(), textMan, 3);
 				break;
 			}
 			playerPosition.first--;
@@ -346,7 +390,13 @@ void Level::update(float dt)
 		);
 		if (grid.playerHit(playerPosition))
 		{
-			resetPlayer();
+			player.setHP(player.getHP() - 1);
+			if (player.getHP() <= 0) {
+				resetPlayer();
+			}
+			heart1.updateHealthDisplay(player.getHP(), textMan, 1);
+			heart2.updateHealthDisplay(player.getHP(), textMan, 2);
+			heart3.updateHealthDisplay(player.getHP(), textMan, 3);
 		}
 		selectedAction = NONE;
 
@@ -379,6 +429,9 @@ void Level::render()
 	window->draw(progressInStepBG);
 	window->draw(targetZone);
 	window->draw(progressInStep);
+	window->draw(heart1);
+	window->draw(heart2);
+	window->draw(heart3);
 	window->draw(lecturer);
 	if(!lecturer.getMessageToDisplay(boardTop, boardRight, boardBottom, boardLeft).getString().isEmpty())
 		window->draw(lecturer.getMessageToDisplay(boardTop, boardRight, boardBottom, boardLeft));
@@ -406,6 +459,18 @@ void Level::resetPlayer()
 	damagedTimer = RESET_TIME;
 	player.setDamaged(damagedTimer);
 	deaths++;
+	switch (gameState->getCurrentCharacter())
+	{
+	case Character::C1:
+		player.setHP(1);
+		break;
+	case Character::C2:
+		player.setHP(2);
+		break;
+	case Character::C3:
+		player.setHP(3);
+		break;
+	}
 }
 
 void Level::reset()

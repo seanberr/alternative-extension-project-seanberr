@@ -4,6 +4,7 @@
 #include "TextureManager.h"
 #include "StageGrid.h"
 #include "Player.h"
+#include "Heart.h"
 #include "LecturEH.h"
 #include <random>
 #include <algorithm>
@@ -61,11 +62,12 @@ private:
 
 	// Default variables for level class.
 	const float GRID_Y_MAX_PROPORTION = 0.6f;
-	const float TIME_PER_STEP = 0.96f;
-	const float TIME_FOR_ACTION = 0.32f;
-	const float TIME_BUFFER = 0.32f;
+	const float TEMPO = 130.0f; //Tempo of claps
+	const float TIME_PER_STEP = 120 / TEMPO;	// time for each step (time between claps)
+	const float TIME_FOR_ACTION = 0.30f;
+	const float TIME_BUFFER = 0.25f;
 	const float RESET_TIME = 1.0f;
-	const float TIME_BETWEEN_CHANGES = 2.92f;
+	const float TIME_BETWEEN_CHANGES = 4.0f;
 	float timeInStep = 0.f;
 	bool soundPlayed = false;
 	float cellDim;
@@ -78,5 +80,12 @@ private:
 	float timeTaken = 0.f;
 	int misses = 0;
 	int deaths = 0;
+
+	//health system
+	Heart heart1;
+	Heart heart2;
+	Heart heart3;
+
+	bool characterLoaded = false;
 };
 

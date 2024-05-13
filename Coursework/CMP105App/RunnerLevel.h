@@ -4,6 +4,7 @@
 #include "Player.h"
 #include <random>
 #include <iostream>
+# include "Heart.h"
 
 class RunnerLevel : BaseLevel
 {
@@ -43,5 +44,11 @@ private:
 	int hits = 0;
 	float time = 0.f;
 	float objects = 0.f;
+	bool characterLoaded = false;
+
+	//health system
+	Heart heart1;
+	Heart heart2;
+	Heart heart3;
 };
 

@@ -114,6 +114,19 @@ WizardLevel::WizardLevel(sf::RenderWindow* hwnd, Input* in, GameState* gs, Audio
 	lecturer = new LecturEH(textMan);
 	lecturer->setSize(sf::Vector2f(window->getSize().y*0.2, window->getSize().y * 0.2));
 	lecturer->setPosition(window->getSize().x * 0.7, window->getSize().y*0.65);
+
+	//setup lives component
+	heart1.updateHealthDisplay(player.getHP(), textMan, 1);
+	heart1.setPosition(sf::Vector2f(0, 0));
+	heart1.setSize(sf::Vector2f(100, 100));
+
+	heart2.updateHealthDisplay(player.getHP(), textMan, 2);
+	heart2.setPosition(sf::Vector2f(0, 100));
+	heart2.setSize(sf::Vector2f(100, 100));
+
+	heart3.updateHealthDisplay(player.getHP(), textMan, 3);
+	heart3.setPosition(sf::Vector2f(0, 200));
+	heart3.setSize(sf::Vector2f(100, 100));
 }
 
 WizardLevel::~WizardLevel() {}
@@ -235,6 +248,27 @@ void WizardLevel::handleInput(float dt)
 
 void WizardLevel::update(float dt)
 {
+	//initialize character specific variables
+	if (characterLoaded == false)
+	{
+		switch (gameState->getCurrentCharacter())
+		{
+		case Character::C1:
+			player.loadCharacter(1);
+			break;
+		case Character::C2:
+			player.loadCharacter(2);
+			break;
+		case Character::C3:
+			player.loadCharacter(3);
+			break;
+		}
+		characterLoaded = true;
+
+		heart1.updateHealthDisplay(player.getHP(), textMan, 1);
+		heart2.updateHealthDisplay(player.getHP(), textMan, 2);
+		heart3.updateHealthDisplay(player.getHP(), textMan, 3);
+	}
 	// check for win
 	if (playerPosition.first == end.x && playerPosition.second == end.y)
 	{
@@ -341,7 +375,14 @@ void WizardLevel::update(float dt)
 		case UP:
 			if (playerPosition.second == 0)
 			{
-				resetPlayer();
+				player.setHP(player.getHP() - 1);
+				if (player.getHP() <= 0) {
+					resetPlayer();
+				}
+
+				heart1.updateHealthDisplay(player.getHP(), textMan, 1);
+				heart2.updateHealthDisplay(player.getHP(), textMan, 2);
+				heart3.updateHealthDisplay(player.getHP(), textMan, 3);
 				break;
 			}
 			playerPosition.second--;	// positive-y innit.
@@ -349,7 +390,14 @@ void WizardLevel::update(float dt)
 		case RIGHT:
 			if (playerPosition.first == boardDimensions.x - 1)
 			{
-				resetPlayer();
+				player.setHP(player.getHP() - 1);
+				if (player.getHP() <= 0) {
+					resetPlayer();
+				}
+
+				heart1.updateHealthDisplay(player.getHP(), textMan, 1);
+				heart2.updateHealthDisplay(player.getHP(), textMan, 2);
+				heart3.updateHealthDisplay(player.getHP(), textMan, 3);
 				break;
 			}
 			playerPosition.first++;
@@ -358,7 +406,14 @@ void WizardLevel::update(float dt)
 		case DOWN:
 			if (playerPosition.second == boardDimensions.y - 1)
 			{
-				resetPlayer();
+				player.setHP(player.getHP() - 1);
+				if (player.getHP() <= 0) {
+					resetPlayer();
+				}
+
+				heart1.updateHealthDisplay(player.getHP(), textMan, 1);
+				heart2.updateHealthDisplay(player.getHP(), textMan, 2);
+				heart3.updateHealthDisplay(player.getHP(), textMan, 3);
 				break;
 			}
 			playerPosition.second++;
@@ -366,7 +421,14 @@ void WizardLevel::update(float dt)
 		case LEFT:
 			if (playerPosition.first == 0)
 			{
-				resetPlayer();
+				player.setHP(player.getHP() - 1);
+				if (player.getHP() <= 0) {
+					resetPlayer();
+				}
+
+				heart1.updateHealthDisplay(player.getHP(), textMan, 1);
+				heart2.updateHealthDisplay(player.getHP(), textMan, 2);
+				heart3.updateHealthDisplay(player.getHP(), textMan, 3);
 				break;
 			}
 			playerPosition.first--;
@@ -378,7 +440,14 @@ void WizardLevel::update(float dt)
 		);
 		if (grid.playerHit(playerPosition))
 		{
-			resetPlayer();
+			player.setHP(player.getHP() - 1);
+			if (player.getHP() <= 0) {
+				resetPlayer();
+			}
+
+			heart1.updateHealthDisplay(player.getHP(), textMan, 1);
+			heart2.updateHealthDisplay(player.getHP(), textMan, 2);
+			heart3.updateHealthDisplay(player.getHP(), textMan, 3);
 		}
 	}
 }
@@ -395,6 +464,9 @@ void WizardLevel::render()
 	window->draw(targetZone);
 	window->draw(progressInStep);
 	window->draw(*lecturer);
+	window->draw(heart1);
+	window->draw(heart2);
+	window->draw(heart3);
 	for (GameObject ind : indicators)
 	{
 		window->draw(ind);
@@ -519,6 +591,7 @@ Put player back to the starting space.
 */
 void WizardLevel::resetPlayer()
 {
+	characterLoaded = false;
 	if (checkPointEnabled) playerPosition = { checkPoint.x, checkPoint.y };
 	else playerPosition = { start.x, start.y };
 	audio->playSoundbyName("death");

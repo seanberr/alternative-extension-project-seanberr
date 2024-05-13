@@ -24,21 +24,21 @@ Lecturer::Lecturer(sf::RenderWindow* hwnd, TextureManager* tm)
 	motivationalMessages =
 	{
 		"",
-		"You can\ndo it!",
+		"Keep grading\npeople's submissions!",
 		"",
-		"The secret\nis confidence!",
+		"Give everyone\na pass!",
 		"",
-		"Don't forget your\ndata structures!",
+		"Don't forget your\nrubric!",
 		"",
-		"You can submit\nbefore deadlines\nif you want!",
+		"You're the\nbest lecturer\nof all time!",
 		"",
-		"Teamwork\nmakes the\ndream work!",
+		"This module\nis better than\nCMP102!",
 		"",
-		"Remember to\npush to the\nrepository!",
+		"I forgot to\npush to the\nrepository :(",
 		"",
-		"Consistency\nis key!",
+		"Dinosaurs\nare cool!",
 		"",
-		"When the going\ngets tough,\nthe tough\nget going!"
+		"When the going\ngets tough,\nthe tough\nget As!"
 	};
 	nextMessage = 0;
 	if(!font.loadFromFile("font/fortuner.otf"))

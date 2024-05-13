@@ -5,6 +5,21 @@ Player::Player()
 {
 	setPosition(sf::Vector2f(100, 100));
 	setSize(sf::Vector2f(100, 100));
+
+	// dino texture is 24x24px. Frames for walk are 4 - 9, inclusive.
+	for (int i = 4; i < 10; ++i)
+	{
+		walk.addFrame(sf::IntRect(i * 24.f, 0.f, 24.f, 24.f));
+	}
+	for (int i = 0; i < 4; ++i)
+	{
+		kick.addFrame(sf::IntRect(i * 24.f + 240.f, 0.f, 24.f, 24.f));
+	}
+	damaged.addFrame(sf::IntRect(0, 0, 24, 24));
+	damaged.addFrame(sf::IntRect(15 * 24, 0, 24, 24));
+	damaged.setFrameSpeed(1.f / 4.f);
+	currentAnimation = &walk;
+	walk.setFrameSpeed(1.f / 10.f);
 	//kick.setLooping(false);
 
 	velocity = { 0,0 };
@@ -15,17 +30,20 @@ Player::~Player()
 }
 
 
-void Player::loadSprites(int ch)
+void Player::loadCharacter(int ch)
 {
 
 	switch (ch) {
 	case 1:
+		hp = 1;
 		dino.loadFromFile("gfx/dinoZach.png");
 		break;
-	case 2:
+	case 2: 
+		hp = 2;
 		dino.loadFromFile("gfx/dinoChris.png");
 		break;
 	case 3:
+		hp = 3;
 		dino.loadFromFile("gfx/dinoTomar.png");
 		break;
 	}
@@ -144,4 +162,14 @@ void Player::update(float dt)
 	currentAnimation->animate(dt);
 	setTextureRect(currentAnimation->getCurrentFrame());
 
+}
+
+int Player::getHP()
+{
+	return hp;
+}
+
+void Player::setHP(int h)
+{
+	hp = h;
 }
