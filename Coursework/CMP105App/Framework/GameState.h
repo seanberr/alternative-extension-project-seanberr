@@ -14,9 +14,11 @@ enum class State {
 	PRE_ONE,
 	PRE_TWO,
 	PRE_THREE,
+	PRE_FOUR,
 	ENDGAME,
 	RUNNER,
 	WIZARD,
+	TUTORIAL,
 	RESET
 };
 

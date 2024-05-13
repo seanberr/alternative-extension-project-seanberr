@@ -50,7 +50,7 @@ StageGrid::StageGrid(sf::Vector2i dimensions, float cellSizeIn, sf::Vector2f pos
 	grid[start.x][start.y] = cellState::START;
 	grid[cp.x][cp.y] = cellState::CHECKPOINT;
 
-	// Check if you are doing the motivation or confusion stage (1 or 2)
+	// Check if you are doing the motivation or confusion or tutorial stage ( 1 2 or 3)
 	if (stage == 1)
 	{
 		// MOTIVATION stage.
@@ -105,6 +105,31 @@ StageGrid::StageGrid(sf::Vector2i dimensions, float cellSizeIn, sf::Vector2f pos
 		//grid[14][6] = HAZARD_RIGHT;	// and here, removed for balancing.
 		grid[15][8] = HAZARD_RIGHT;
 
+	}
+	if (stage == 3)
+	{
+		//TUTORIAL STAGE
+		for (int i = 0; i < dimensions.x * 0.7; ++i)
+		{
+			grid[i][4] = cellState::PIT;
+			grid[i][6] = cellState::PIT;
+		}
+		grid[18][5] = cellState::PIT;
+		grid[17][5] = cellState::PIT;
+		grid[16][5] = cellState::PIT;
+		grid[15][5] = cellState::PIT;
+		grid[13][6] = cellState::PIT;
+		grid[13][7] = cellState::PIT;
+		grid[13][8] = cellState::PIT;
+		grid[13][9] = cellState::PIT;
+		grid[13][4] = cellState::PIT;
+		grid[13][3] = cellState::PIT;
+		grid[13][2] = cellState::PIT;
+		grid[13][1] = cellState::PIT;
+		grid[13][0] = cellState::PIT;
+
+		grid[14][9] = HAZARD_UP;
+		grid[14][0] = HAZARD_DOWN;
 	}
 }
 

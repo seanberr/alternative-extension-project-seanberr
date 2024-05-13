@@ -21,31 +21,12 @@ _supplied project_
 
 Unforbidden Rhythms
 
-## Brief Overview of game 
+## Added Features
 
-I aim to expand the project by introducing a variety of new features that will enhance it. Items/powerups will be scattered throughout the levels and are able to be picked up and used by players. New enemies will have different movement patterns, and can now be defeated by the player. I will also be adding new levels, with differing songs and tempos between them. I will also add a points system to keep track of the players accuracy with their timing. I want to add different characters who have different attributes, giving the user a choice in how they wish to play.
+-Snare beats now align to a set music tempo. In the original version they didn't do this.
 
-## Must Have Features
+-A health system has been added. Taking damage results in a loss of one heart, and you die if you run out of hearts.
 
-* **At least 3 playable characters with different abilities** Each with unique sprites and animation.
-* **Snare beats align to the music** Snares sync up with the tempo of the music to make the game easier to play.
-* **Tutorial level and final level** 2 extra levels: one to teach the game, and test the players skills at the end.
-* **Item/Powerup pickups** Systems to allow players to pick up and use items or powerups.
+-There are now 3 different playable characters. They range in difficulty from easy to hard, having differening amounts of health.
 
-
-## Should Have Features
-
-* **Points system** Points system to keep track of players score.
-* **New enemies** Several new enemies with unique movement patterns.
-
-## Could Have Features
-
-* **Final boss level** The final level. Big boss with several phases that has a unique design and animations.
-* **Rating system** System that ranks user based on their performance in each level, giving them a rating of F to S
-
-## Wish to Have Features
-
-* **Challenge mode** New mode that increases the difficulty of each level.
-* **Controller support** You can play with a controller!
-
-
+-There is now a tutorial level that teaches the basics of the game.

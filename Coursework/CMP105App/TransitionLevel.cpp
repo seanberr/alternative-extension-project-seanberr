@@ -44,6 +44,10 @@ void TransitionLevel::handleInput(float dt)
 			nextState = State::WIZARD;
 			gameState->setCurrentState(State::CHARSELECT);
 			break;
+		case State::PRE_FOUR:
+			nextState = State::TUTORIAL;
+			gameState->setCurrentState(State::CHARSELECT);
+			break;
 		case State::ENDGAME:
 			gameState->setCurrentState(State::TITLE);
 			break;

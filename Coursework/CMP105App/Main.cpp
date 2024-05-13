@@ -9,6 +9,7 @@
 #include "TitleScreen.h"
 #include "TransitionLevel.h"
 #include "RunnerLevel.h"
+#include "TutorialLevel.h"
 #include "WizardLevel.h"
 #include "TextureManager.h"
 #include "Framework/AudioManager.h"
@@ -86,6 +87,7 @@ int main()
 	WizardLevel wizardLevel(&window, &input, &gameState, &audioManager, textureManager, 2);
 	TransitionLevel transLevel(&window, &input, &gameState, &audioManager, textureManager);
 	RunnerLevel runnerLevel(&window, &input, &gameState, &audioManager, textureManager);
+	TutorialLevel tutorialLevel(&window, &input, &gameState, &audioManager, textureManager);
 
 	// begin on the title screen
 	gameState.setCurrentState(State::TITLE);
@@ -154,9 +156,20 @@ int main()
 			wizardLevel.update(deltaTime);
 			wizardLevel.render();
 			break;
+		case State::TUTORIAL:
+			if (musicPlaying != "tutorialLevel")
+			{
+				audioManager.playMusicbyName("tutorialLevel");
+				musicPlaying = "tutorialLevel";
+			}
+			tutorialLevel.handleInput(deltaTime);
+			tutorialLevel.update(deltaTime);
+			tutorialLevel.render();
+			break;
 		case State::PRE_ONE:
 		case State::PRE_TWO:
 		case State::PRE_THREE:
+		case State::PRE_FOUR:
 		case State::ENDGAME:
 		case State::CHARSELECT:
 			// All five of these states are captured in the transition level
